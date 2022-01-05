@@ -1,15 +1,20 @@
-import React from 'react';
+import React from "react";
 
-const Dashboard = ({city, desc, icon}) => {
-    console.log("inside dash component",city, desc, icon)
-    return (
-        <div className="App-dashboard">
-            <p>City: {city} </p>
-            <p>Weather: {desc} </p>
-            {icon && <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="weather icon"/>}
-            
-        </div>
-    );
+const Dashboard = (props) => {
+  const { data } = props;
+  return (
+    <div className="App-dashboard">
+      <p>{data?.name}</p>
+      <p>{data?.weather?.[0]?.description}</p>
+      <p>{data?.main?.temp && <span>{data?.main?.temp}°</span>}</p>
+      {data?.weather?.[0].icon && (
+        <img
+          src={`https://openweathermap.org/img/wn/${data?.weather?.[0].icon}@2x.png`}
+          alt="weather icon"
+        />
+      )}
+    </div>
+  );
 };
 
 export default Dashboard;

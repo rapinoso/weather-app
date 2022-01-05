@@ -1,48 +1,32 @@
 import Searchbar from "./Searchbar";
 import "./App.css";
 import Dashboard from "./Dashboard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchOpenWeather } from "./api/weatherApi";
 
 const API_KEY = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
 function App() {
-  const [city, setCity] = useState("");
-  const [desc, setDesc] = useState("");
-  const [icon, setIcon] = useState("");
+  const [weatherData, setWeatherData] = useState({});
+  const [city, setCity] = useState(null);
 
-  const getData = (city) => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setCity(data.name);
-        setDesc(data.weather[0].description);
-        setIcon(data.weather[0].icon);
-        console.log(city, desc, icon);
-      });
-  };
+  useEffect(() => {
+    fetchOpenWeather(city, API_KEY).then((res) => {
+      console.log(res);
+      setWeatherData(res);
+    });
+  }, [city]);
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={getWeather}>Click for weather description!</button>
-      </header> */}
       <div className="center">
-        <Searchbar callback={getData} />
-        <Dashboard city={city} desc={desc} icon={icon} />
+        <Searchbar
+          callback={fetchOpenWeather}
+          onCityChange={(e) => {
+            setCity(e.target.value);
+          }}
+        />
+        <Dashboard data={weatherData} />
       </div>
     </div>
   );

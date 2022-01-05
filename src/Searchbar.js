@@ -1,17 +1,12 @@
-import React from 'react';
+import React from "react";
 
 const Searchbar = (props) => {
-
-    const handleChange = e => {
-        console.log(e.target.value)
-        props.callback(e.target.value)
-    }
-    return (
-        <div className="App-searchbar">
-            <h1>Insert a city name to get its weather forecast</h1>
-            <input name="searchbar" id="searchbar" onChange={handleChange}/>
-        </div>
-    );
+  return (
+    <div className="App-searchbar">
+      <h1>Insert a city name to get its weather forecast</h1>
+      <input type="text" name="searchbar" onChange={props.onCityChange} />
+    </div>
+  );
 };
 
 export default Searchbar;

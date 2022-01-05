@@ -1,7 +1,8 @@
 .App {
   text-align: center;
   color: black;
-  background-color: cadetblue;
+  background: lightblue;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 /* .App-logo {
@@ -38,11 +39,29 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+} */
+
+input[type="text"] {
+  font-weight: 600;
+  border: none;
+  width: 20rem;
+  height: 2rem;
+  border-radius: .5rem;
+  font-size: 2rem;
+  padding: .5rem;
+  text-align: center;
+}
+
+input[type="text"]:focus {
+  box-shadow: 0 0 0 2px rgba(39, 94, 254, .3);
 }
 
 .App-dashboard {
-  min-height: 200px;
-} */
+  margin: 2rem;
+  background-color: lightblue;
+  border-radius: 1rem;
+  width: 20rem;
+} 
 
 .App-link {
   color: #61dafb;
