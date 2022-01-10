@@ -1,7 +1,6 @@
 import React from "react";
 
-const Dashboard = (props) => {
-  const { data } = props;
+const Dashboard = ({data}) => {
   return (
     <div className="App-dashboard">
       <p>{data?.name}</p>
